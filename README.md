@@ -52,3 +52,11 @@ Once the server is running, visit:
 
 
 * Gitlab repo container registry [https://gitlab.com/dejanualex/devops_demo/container_registry/11708738](https://gitlab.com/dejanualex/devops_demo/container_registry/11708738). Image manifest `registry.example.com/mynamespace/myproject/image:tag` [registry.gitlab.com/dejanualex/devops_demo:latest](registry.gitlab.com/dejanualex/devops_demo:latest)
+
+```
+$CI_REGISTRY, $CI_REGISTRY_USER, $CI_REGISTRY_PASSWORD, and $CI_REGISTRY_IMAGE are predefined GitLab CI variables — no setup needed
+$CI_REGISTRY_IMAGE resolves to registry.gitlab.com/dejanualex/devops_demo
+```
+* DockerHub [https://hub.docker.com/r/dejanualex/appserver](https://hub.docker.com/r/dejanualex/appserver)
+
+
