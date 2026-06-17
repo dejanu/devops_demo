@@ -7,7 +7,7 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: "/certs"
 
-build-and-push:
+build-and-push-dockerhub:
   stage: build
   image: docker:24-dind
   services:
@@ -17,14 +17,33 @@ build-and-push:
   before_script:
     - echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin $REGISTRY
   script:
-    # Extract commit SHA and create tags
     - COMMIT_SHA=$(git rev-parse --short HEAD)
     - IMAGE_SHA_TAG="$REGISTRY/$IMAGE_NAME:sha-$COMMIT_SHA"
     - IMAGE_LATEST_TAG="$REGISTRY/$IMAGE_NAME:latest"
-    
-    # Build and push with both tags
     - docker build -t $IMAGE_SHA_TAG -t $IMAGE_LATEST_TAG .
     - docker push $IMAGE_SHA_TAG
     - docker push $IMAGE_LATEST_TAG
   after_script:
     - docker logout $REGISTRY
+
+build-and-push-gitlab:
+  stage: build
+  image: docker:24-dind
+  services:
+    - docker:24-dind
+  only:
+    - main
+  variables:
+    GL_REGISTRY: $CI_REGISTRY
+    GL_IMAGE: $CI_REGISTRY_IMAGE
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - COMMIT_SHA=$(git rev-parse --short HEAD)
+    - IMAGE_SHA_TAG="$GL_IMAGE:sha-$COMMIT_SHA"
+    - IMAGE_LATEST_TAG="$GL_IMAGE:latest"
+    - docker build -t $IMAGE_SHA_TAG -t $IMAGE_LATEST_TAG .
+    - docker push $IMAGE_SHA_TAG
+    - docker push $IMAGE_LATEST_TAG
+  after_script:
+    - docker logout $CI_REGISTRY
