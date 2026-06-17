@@ -9,7 +9,7 @@ test:
     - pip install uv
     - uv sync --group dev
   script:
-    - uv run pytest
+    - uv run pytest tests/ -v
 
 variables:
   REGISTRY: docker.io
