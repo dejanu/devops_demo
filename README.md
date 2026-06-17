@@ -59,4 +59,5 @@ $CI_REGISTRY_IMAGE resolves to registry.gitlab.com/dejanualex/devops_demo
 ```
 * DockerHub [https://hub.docker.com/r/dejanualex/appserver](https://hub.docker.com/r/dejanualex/appserver)
 
-
+  - Github tag versioning
+  - Gitlab commit sha versioning
