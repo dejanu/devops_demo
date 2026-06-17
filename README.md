@@ -47,3 +47,8 @@ uv run uvicorn main:app --reload
 Once the server is running, visit:
 - Swagger UI: `http://127.0.0.1:8000/docs`
 - ReDoc: `http://127.0.0.1:8000/redoc`
+
+## Registry
+
+
+* Gitlab repo container registry [https://gitlab.com/dejanualex/devops_demo/container_registry/11708738](https://gitlab.com/dejanualex/devops_demo/container_registry/11708738). Image manifest `registry.example.com/mynamespace/myproject/image:tag` [registry.gitlab.com/dejanualex/devops_demo:latest](registry.gitlab.com/dejanualex/devops_demo:latest)
